@@ -78,12 +78,12 @@ class RailWalkerMujocoComplianceWrapper(gym.ObservationWrapper, JoystickEnvironm
         return False
 
     def step(self, action):
-        obs, reward, done, info = self.env.step(action)
+        obs, reward, done, trunc, info = self.env.step(action)
         info.update(self.joystick_policy.last_info)
         done = done or self.joystick_policy.should_terminate() or self.joystick_policy.should_truncate()
         if self.joystick_policy.should_truncate():
             info["TimeLimit.truncated"] = True
-        return self.observation(obs), reward, done, info
+        return self.observation(obs), reward, done, trunc, info
 
     def observation(self, observation):
         obs = {}

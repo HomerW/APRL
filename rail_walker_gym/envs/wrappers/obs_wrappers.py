@@ -28,14 +28,14 @@ class AddPreviousActions(gym.ObservationWrapper):
         return super().reset(*args, **kwargs)
 
     def step(self, action):
-        obs, rew, done, info = super().step(action)
+        obs, rew, done, trunc, info = super().step(action)
         if done and "TimeLimit.joystick_target_change" in info and info["TimeLimit.joystick_target_change"]:
             self._last_joystick_truncation = True
         else:
             self._last_joystick_truncation = False
         
         self.actions.append(copy.deepcopy(action))
-        return obs, rew, done, info
+        return obs, rew, done, trunc, info
 
     def observation(self, observation):
         observation = copy.copy(observation)

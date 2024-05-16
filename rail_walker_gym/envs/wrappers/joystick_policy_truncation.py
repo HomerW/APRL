@@ -22,7 +22,7 @@ class JoystickPolicyTruncationWrapper(gym.Wrapper, JoystickEnvironment):
         return self.env.set_joystick_policy(joystick_policy)
     
     def step(self, action):
-        obs, reward, done, info = self.env.step(action)
+        obs, reward, done, trunc, info = self.env.step(action)
         if not done and (
             self.joystick_policy.lock_target and self.joystick_policy.has_after_after_step
         ):
@@ -32,7 +32,7 @@ class JoystickPolicyTruncationWrapper(gym.Wrapper, JoystickEnvironment):
             self._last_obs = obs
         else:
             self._last_obs = None
-        return obs, reward, done, info
+        return obs, reward, done, trunc, info
     
     def seed(self, seed=None):
         self.random_state = np.random.RandomState(seed)

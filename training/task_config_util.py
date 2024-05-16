@@ -9,7 +9,7 @@ import rail_walker_gym.envs.wrappers as envwrappers
 from rail_walker_gym.joystick_policy import JoystickPolicyStrictRewardProvider, JoystickPolicyForwardOnlyTargetProvider, JoystickPolicyResetterEarlyStopTruncationProvider, JoystickPolicyManualResetter
 from rail_walker_gym.joystick_policy_mujoco import JoystickPolicyPointInSimResetter, JoystickPolicyLastPositionAndYawResetter
 from rail_mujoco_walker import RailSimWalkerDMControl
-from checkpoint_util import load_checkpoint_file
+from training.checkpoint_util import load_checkpoint_file
 from jaxrl5.agents import SACLearner
 from jaxrl5.agents.sac.sac_learner_wdynamics import SACLearnerWithDynamics
 import copy
